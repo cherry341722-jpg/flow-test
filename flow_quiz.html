@@ -1,0 +1,444 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>四大象限心流人格定位</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0C; --bg2:#0E0D10; --panel:#15131A; --panel2:#1B1822;
+    --gold:#C9A24B; --gold-bright:#F0D98A; --gold-deep:#8C6E2E;
+    --ink:#ECE4D2; --muted:#938B78; --line:#3A3326;
+    --rt:#E8B84B; --lt:#CD623F; --lb:#6E78C0; --rb:#3FA08C;
+    --serif:"Noto Serif TC",serif; --sans:"Noto Sans TC",sans-serif; --num:"Cinzel",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:
+     radial-gradient(1200px 700px at 50% -10%, #17141d 0%, var(--bg) 55%, #060608 100%);
+     color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;
+     min-height:100%}
+  body{padding:28px 16px 80px}
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* gold frame */
+  .frame{position:relative;border:1px solid var(--gold-deep);background:
+     linear-gradient(180deg,rgba(201,162,75,.05),rgba(0,0,0,0) 30%),var(--bg2);
+     padding:46px 34px 40px;box-shadow:0 0 0 1px rgba(0,0,0,.6) inset,0 28px 80px rgba(0,0,0,.6)}
+  .frame::before,.frame::after{content:"";position:absolute;width:16px;height:16px;border:1px solid var(--gold)}
+  .frame::before{top:7px;left:7px;border-right:none;border-bottom:none}
+  .frame::after{bottom:7px;right:7px;border-left:none;border-top:none}
+
+  .eyebrow{font-family:var(--num);letter-spacing:.42em;text-transform:uppercase;
+     font-size:11px;color:var(--gold);text-align:center;margin-bottom:20px;padding-left:.42em}
+  h1{font-family:var(--serif);font-weight:900;text-align:center;line-height:1.18;
+     font-size:clamp(28px,7vw,44px);letter-spacing:.04em;
+     background:linear-gradient(180deg,var(--gold-bright),var(--gold) 55%,var(--gold-deep));
+     -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px}
+  .sub{text-align:center;color:var(--muted);font-size:14px;line-height:1.9;letter-spacing:.04em;max-width:46ch;margin:0 auto}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold-deep),transparent);margin:30px 0}
+
+  /* form */
+  .axes-note{margin:6px auto 0;max-width:50ch;color:#7d7660;font-size:12.5px;text-align:center;line-height:2}
+  .axes-note b{color:var(--gold);font-weight:500}
+  form{margin-top:30px;display:grid;gap:18px}
+  .frow label{display:block;font-size:12.5px;letter-spacing:.18em;color:var(--gold);
+     margin-bottom:8px;font-weight:400}
+  input,select{width:100%;background:#0C0B0E;border:1px solid var(--line);color:var(--ink);
+     font-family:var(--sans);font-size:15px;padding:13px 14px;outline:none;transition:.2s}
+  input::placeholder{color:#5a5446}
+  input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.12)}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
+     background-position:calc(100% - 18px) 19px,calc(100% - 12px) 19px;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .btn{display:block;width:100%;cursor:pointer;border:1px solid var(--gold);
+     background:linear-gradient(180deg,rgba(240,217,138,.16),rgba(201,162,75,.04));
+     color:var(--gold-bright);font-family:var(--serif);font-weight:700;letter-spacing:.22em;
+     font-size:15px;padding:16px;margin-top:8px;transition:.22s;text-align:center}
+  .btn:hover{background:linear-gradient(180deg,rgba(240,217,138,.3),rgba(201,162,75,.1));box-shadow:0 0 26px rgba(201,162,75,.25)}
+  .btn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+  .err{color:#d98b6f;font-size:13px;text-align:center;min-height:18px;letter-spacing:.05em}
+
+  /* question */
+  .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+  .qcount{font-family:var(--num);font-size:13px;letter-spacing:.3em;color:var(--gold)}
+  .qcount b{font-size:30px;color:var(--gold-bright);font-weight:600}
+  .qaxis{font-size:11px;letter-spacing:.22em;color:var(--muted);border:1px solid var(--line);padding:5px 11px}
+  .bar{height:2px;background:#241f15;margin-bottom:34px;position:relative;overflow:hidden}
+  .bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));transition:width .45s cubic-bezier(.5,0,.2,1)}
+  .qtext{font-family:var(--serif);font-weight:500;font-size:clamp(19px,4.6vw,25px);line-height:1.85;
+     letter-spacing:.02em;min-height:140px;display:flex;align-items:center}
+  .qtext .lead{color:var(--gold)}
+  .opts{display:grid;gap:11px;margin-top:14px}
+  .opt{cursor:pointer;text-align:left;border:1px solid var(--line);background:#0E0D11;color:var(--ink);
+     font-family:var(--sans);font-size:15px;padding:15px 18px;letter-spacing:.06em;transition:.16s;
+     display:flex;align-items:center;gap:14px}
+  .opt .dot{width:9px;height:9px;border:1px solid var(--gold);border-radius:50%;flex:none;transition:.16s}
+  .opt:hover{border-color:var(--gold);background:#15121a;transform:translateX(3px)}
+  .opt:hover .dot{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  .opt:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+  .back{margin-top:26px;background:none;border:none;color:var(--muted);font-family:var(--sans);
+     font-size:13px;letter-spacing:.1em;cursor:pointer;padding:6px}
+  .back:hover{color:var(--gold)}
+
+  /* result */
+  .res-eyebrow{font-family:var(--num);letter-spacing:.36em;font-size:11px;color:var(--gold);text-align:center;text-transform:uppercase}
+  .res-name{font-family:var(--serif);font-weight:900;text-align:center;font-size:clamp(24px,6vw,36px);
+     letter-spacing:.05em;margin:12px 0 4px;color:var(--gold-bright)}
+  .res-quad{text-align:center;font-family:var(--serif);font-size:21px;font-weight:700;letter-spacing:.14em}
+  .res-quadsub{text-align:center;color:var(--muted);font-size:13px;letter-spacing:.26em;margin-top:6px}
+  .coords{display:flex;justify-content:center;gap:30px;margin:24px 0 6px;flex-wrap:wrap}
+  .coord{text-align:center}
+  .coord .k{font-size:11px;letter-spacing:.2em;color:var(--muted)}
+  .coord .v{font-family:var(--num);font-size:34px;color:var(--gold-bright);line-height:1.2}
+  .coord .v small{font-size:15px;color:var(--gold-deep)}
+
+  .chartwrap{margin:14px auto 8px;max-width:560px}
+  svg{display:block;width:100%;height:auto}
+  @keyframes sweep{to{transform:rotate(360deg)}}
+  @keyframes pulse{0%,100%{r:13;opacity:.35}50%{r:22;opacity:.05}}
+  .sweep{transform-origin:300px 300px;animation:sweep 6.5s linear infinite}
+  .halo{animation:pulse 2.6s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){.sweep{animation:none}.halo{animation:none}}
+
+  .sec{margin-top:30px}
+  .sec h3{font-family:var(--serif);font-weight:700;font-size:18px;letter-spacing:.1em;color:var(--gold);
+     margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:12px}
+  .sec h3 .gn{font-family:var(--num);font-size:13px;color:var(--gold-deep);letter-spacing:.2em}
+  .sec p{font-size:15px;line-height:2;letter-spacing:.03em;color:#ddd5c2;margin-bottom:12px}
+  .sec p b{color:var(--gold-bright);font-weight:500}
+  .feyn{border-left:2px solid var(--gold);background:linear-gradient(90deg,rgba(201,162,75,.06),transparent);
+     padding:16px 20px;font-style:normal}
+  .tag{display:inline-block;font-family:var(--num);font-size:11px;letter-spacing:.2em;color:var(--bg);
+     background:var(--gold);padding:3px 10px;margin-bottom:14px}
+  .footer-note{margin-top:34px;text-align:center;color:#6f6856;font-size:12px;letter-spacing:.08em;line-height:2}
+  .restart{margin-top:22px}
+  .hidden{display:none}
+
+  /* ---- mobile ---- */
+  @media (max-width:560px){
+    body{padding:14px 9px 60px}
+    .frame{padding:30px 16px 28px}
+    .frame::before,.frame::after{width:12px;height:12px}
+    .eyebrow{letter-spacing:.3em;font-size:10px}
+    .axes-note{font-size:11.5px}
+    .rule{margin:24px 0}
+    .qtext{min-height:120px;line-height:1.7}
+    .opt{padding:14px 15px;font-size:14.5px}
+    .coords{gap:18px}
+    .coord .v{font-size:28px}
+    .sec p{font-size:14.5px;line-height:1.95}
+    .feyn{padding:14px 16px}
+    .res-quad{font-size:19px;letter-spacing:.08em}
+  }
+  @media (max-width:380px){
+    .frame{padding:26px 12px 24px}
+    h1{font-size:27px}
+    .opt{font-size:14px;padding:13px 13px;gap:10px}
+    .qcount b{font-size:26px}
+  }
+</style>
+
+<div class="wrap">
+  <div class="frame">
+
+    <!-- ============ SCREEN: INTRO ============ -->
+    <section id="intro">
+      <div class="eyebrow">Flow Persona · Quadrant Radar</div>
+      <h1>四大象限<br>心流人格定位</h1>
+      <p class="sub">你的心流，不是「有」或「沒有」，而是落在一張地圖上的某個座標。先告訴我你是誰，再用 20 個問題，把你此刻的位置標出來。</p>
+      <p class="axes-note">
+        橫軸 <b>情緒與生命質感</b>：Lv1 萬劫不復 → Lv10 圓滿涅槃<br>
+        縱軸 <b>能量流向與自我結構</b>：Lv1 內聚（本能囚徒）→ Lv10 外張（忘我超越）
+      </p>
+      <div class="rule"></div>
+      <form id="introForm" autocomplete="off">
+        <div class="frow">
+          <label>姓名</label>
+          <input id="f_name" placeholder="請輸入你的姓名" maxlength="12">
+        </div>
+        <div class="two">
+          <div class="frow">
+            <label>性別</label>
+            <select id="f_gender">
+              <option value="">請選擇</option>
+              <option value="女性">女性</option>
+              <option value="男性">男性</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <div class="frow">
+            <label>出生年（西元）</label>
+            <input id="f_year" inputmode="numeric" placeholder="例如 1991" maxlength="4">
+          </div>
+        </div>
+        <div class="frow">
+          <label>職業</label>
+          <input id="f_job" placeholder="例如 設計師、創業者、自由工作者" maxlength="20">
+        </div>
+        <div class="frow">
+          <label>興趣</label>
+          <input id="f_hobby" placeholder="例如 畫畫、登山、寫作" maxlength="20">
+        </div>
+        <button type="submit" class="btn">開始定位</button>
+        <div class="err" id="introErr"></div>
+      </form>
+    </section>
+
+    <!-- ============ SCREEN: QUESTION ============ -->
+    <section id="quiz" class="hidden">
+      <div class="qtop">
+        <div class="qcount"><b id="qNum">01</b> / 20</div>
+        <div class="qaxis" id="qAxis">情緒軸</div>
+      </div>
+      <div class="bar"><i id="qBar" style="width:5%"></i></div>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="qOpts"></div>
+      <button class="back" id="qBack">← 上一題</button>
+    </section>
+
+    <!-- ============ SCREEN: RESULT ============ -->
+    <section id="result" class="hidden">
+      <div class="res-eyebrow">Your Flow Coordinate</div>
+      <div class="res-name" id="rName"></div>
+      <div class="res-quad" id="rQuad"></div>
+      <div class="res-quadsub" id="rQuadSub"></div>
+
+      <div class="coords">
+        <div class="coord"><div class="k">情緒與生命質感</div><div class="v" id="rX">5<small>/10</small></div></div>
+        <div class="coord"><div class="k">能量流向與自我結構</div><div class="v" id="rY">5<small>/10</small></div></div>
+      </div>
+
+      <div class="chartwrap" id="chart"></div>
+
+      <div class="sec">
+        <h3><span class="gn">I.</span>你此刻的狀態 · 費曼解析</h3>
+        <div class="feyn"><p id="rState"></p></div>
+      </div>
+      <div class="sec">
+        <h3><span class="gn">II.</span>這個位置的你，行為長什麼樣</h3>
+        <p id="rBehav"></p>
+      </div>
+      <div class="sec">
+        <h3><span class="gn">III.</span>你的心流，是怎麼被自己關閉的</h3>
+        <p id="rClose"></p>
+      </div>
+      <div class="sec">
+        <h3><span class="gn">IV.</span>如何突破你的限制性信念與行為</h3>
+        <p id="rBreak"></p>
+      </div>
+
+      <button class="btn restart" id="rRestart">重新定位</button>
+      <p class="footer-note">這張心流圖會隨你的狀態改變。建議每隔一段時間重測一次，看自己移動到哪裡。</p>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var P={}; // person
+  var answers=new Array(20).fill(0);
+  var cur=0;
+
+  // ---- 20 questions: lead template + body + axis ----
+  // axis 'x' = 情緒與生命質感 (agree=higher) ; 'y' = 能量流向 (agree=higher/outward)
+  var Q=[
+    {a:'x',l:"{n}，身為一位 {a} 歲的{o}，我們先從每天的開始說起——",b:"早上醒來，我心裡比較常浮現的是「期待」，而不是「沉重」。"},
+    {a:'x',l:"{n}，當你忙完一天的{o}事務、終於能喘口氣時——",b:"就算一件事不如預期，我也能比較快回到平穩。"},
+    {a:'x',l:"撇開{o}這個身分，純粹作為{g}的你，{n}——",b:"我現在的生活，有很大一部分是我真心喜歡的。"},
+    {a:'x',l:"{n}，靜下來，誠實地問問自己——",b:"我時常能感覺到「活著是飽滿的、是值得的」。"},
+    {a:'x',l:"{n}，作為一個已經走過一些起伏的 {a} 歲{g}——",b:"就算遇到低潮，我心底仍相信事情會過去、會更好。"},
+    {a:'x',l:"{n}，當四下無人、只剩你和你自己的時候——",b:"我跟自己獨處時，內心是平靜的，不是焦躁的。"},
+    {a:'x',l:"{n}，把你這位{o}的人生整個攤開來看——",b:"我現在的人生，比較像「在綻放」，而不是「在硬撐」。"},
+    {a:'x',l:"{n}，就連你最愛的{i}，有時也讓你有罪惡感嗎？先想想——",b:"我能允許自己好好享受當下，不帶罪惡感。"},
+    {a:'x',l:"{n}，回顧最近這半年的你——",b:"我整體的情緒質感，是偏明亮的，而不是偏灰暗的。"},
+    {a:'x',l:"{n}，望向前方的路，身為 {a} 歲的你——",b:"我對未來的感覺，是有光、有盼望的。"},
+    {a:'y',l:"{n}，來談談你的能量，平常都流到哪裡去了——",b:"我的能量比較常用在「向外表達、影響他人」，而不是「守住內在、自我保護」。"},
+    {a:'y',l:"{n}，把你放進一群人之中，作為{g}的你——",b:"我傾向主動發聲，而不是只在旁邊安靜觀察。"},
+    {a:'y',l:"{n}，關於把自己「拿出來」給世界看這件事——",b:"我能自在地把心裡的想法、創作、能量釋放出來。"},
+    {a:'y',l:"{n}，當你全心投入{i}的時候——",b:"我常進入「忘了自己、忘了時間」的狀態。"},
+    {a:'y',l:"{n}，感受一下你此刻整個人的狀態——",b:"我比較像「把自己打開來流動」，而不是「把自己收得很緊」。"},
+    {a:'y',l:"{n}，看看你大部分的行動，背後是什麼在驅動——",b:"我比較常出於「超越與創造的渴望」行動，而不是「生存與防衛的本能」。"},
+    {a:'y',l:"{n}，身為一位{o}，面對被看見、被評論這件事——",b:"我願意冒著被評論的風險，把自己展現出來。"},
+    {a:'y',l:"{n}，觀察一下你的日常節奏——",b:"我能自由地切換與流動，而不是困在固定的反應裡。"},
+    {a:'y',l:"{n}，在投入{i}或工作的某些時刻——",b:"我常感覺自己跟比自己更大的東西連在一起（使命、創作、群體、宇宙）。"},
+    {a:'y',l:"{n}，當一個機會突然出現在你面前——",b:"我比較常「迎上去表達自己」，而不是「縮回去保護自己」。"}
+  ];
+  var SCALE=[["非常不符合",1],["不太符合",2],["普通",3],["還算符合",4],["非常符合",5]];
+
+  // ---- quadrant analysis ----
+  var QUAD={
+    rt:{name:"光照之境",sub:"圓滿 · 外張 · 忘我超越",color:"var(--rt)",
+      state:"想像一盞已經點亮、而且玻璃罩擦得乾乾淨淨的燈。{n}，你的內在能量是滿的（情緒質感高），而且你願意把這份光放出來照亮別人（能量外張）。這就是心流最完整的樣子——你不只自己在發光，光還會流動出去。這正是「忘我超越」：做喜歡的事時，你會忘記時間、忘記自我，整個人跟事情合而為一。",
+      behav:"你做事帶著一種不費力的篤定，能自然感染身邊的人。你願意承擔、願意表達，常常是一群人裡那個「帶來新答案、讓事情轉向」的角色。別人靠近你會覺得被點亮。",
+      close:"你的風險不是「關閉」，而是「過度燃燒」。因為光很好給，你可能給到忘了補充，把自己一點一點掏空——一旦你開始相信「我必須一直發光，才有價值」，那一刻，你就親手把心流的閥門越關越小，慢慢往左上的烈焰之境滑過去。",
+      brk:"你的功課是學會「留電」。光不需要隨時全開——懂得在沒人需要時，把自己收回內在、安靜充電，你的光才能長久。練習允許自己有「不發光的時刻」，你的價值不靠持續燃燒來證明。"},
+    lt:{name:"烈焰之境",sub:"失衡 · 外張 · 燃燒耗散",color:"var(--lt)",
+      state:"想像一台油門踩到底、但油箱快空了的車。{n}，你的能量還在拼命往外衝（外張），可是你的內在質感其實已經偏累、偏低了（情緒質感低）。你看起來很活躍、很投入，實際上是在燃燒老本。這叫「外張耗散」——流動是有的，但流出去的是消耗，不是滋養。",
+      behav:"你常常停不下來，用忙碌、用表現、用付出去證明自己。你心底怕一旦慢下來，就會被人看見「其實我沒那麼好」，於是更用力地往外衝、往外給。",
+      close:"你關閉心流的方式，是「不准自己停」。你把休息當偷懶、把脆弱當失敗，於是能量只出不進。但真正的心流需要一進一出、有充有放——你只剩「放」，引擎遲早會熄火。",
+      brk:"你的突破不在「更努力」，而在「敢停」。練習在累的時候真的停下來、回到內在補電，把「我必須一直表現」這個信念拆掉。你不是因為一直發光才有價值——你本來就有價值。先讓情緒質感回暖，你會自然往右邊的光照之境移動。"},
+    lb:{name:"囚籠之境",sub:"沉淪 · 內聚 · 本能困鎖",color:"var(--lb)",
+      state:"想像一個人躲進一間關了燈、上了鎖的房間——因為外面太痛，所以先把自己整個收起來。{n}，你現在的情緒質感偏低（內在很辛苦），能量也深深往內收（內聚到接近封閉）。這是「本能困鎖」：你的系統進入了生存模式，先求自保，暫時不敢流動、不敢表達。這不是你的錯，是受過傷之後最自然的保護。",
+      behav:"你傾向退縮、觀望，把真正的自己藏起來。你可能常覺得累、覺得麻、提不起勁；面對外界的邀請，第一個反應是「算了吧」。",
+      close:"你關閉心流的方式，是「提早把門關上」——在還沒被傷之前，先縮回去，用一句「反正也不會好」保護自己不再失望。這層保護擋掉了傷害，但也同時擋掉了光。",
+      brk:"你的突破，是「先開一條小縫就好」。不用一下子打開全部——從一件很小、很安全的事開始，跟著身體的綠燈動一次、驗證一次。每一個小小的「我做了，而且結果還好」，都會把門推開一點。先讓情緒質感往右回暖，能量自然就敢往外流。"},
+    rb:{name:"靜水之境",sub:"圓滿 · 內聚 · 自持涵養",color:"var(--rb)",
+      state:"想像一口很深、很穩、水質清澈的井。{n}，你的內在質感是飽滿的、是高的（情緒質感高），但這份豐盛你主要往內收、留給自己與少數人（能量內聚）。這是一種很穩的心流——「自持涵養」：你不向外張揚，但你內在是流動的、是滋養的。你跟自己相處得很好。",
+      behav:"你安靜、有定見、不太需要外界的肯定。你把能量用在深耕自己、照顧少數重要的人，而不是向外擴散。你的穩，是很多人羨慕的。",
+      close:"你的風險不是痛苦，而是「只到這裡為止」。井水很好，但你可能因為覺得「向外表達有風險、會被看見、會被評論」，而一直不把這份豐盛分享出去。你關閉的，是「外張」這個方向——心流是穩的，但還沒被放大。",
+      brk:"你的突破，是「讓井水溢出來一點」。練習把你內在的好，小步地向外表達、分享、被看見。你不會因此失去內在的穩，反而會從「自己圓滿」走向「圓滿且能照亮別人」，一步步往右上的光照之境移動。"}
+  };
+
+  // ---- helpers ----
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function fill(t){return t.replace(/\{n\}/g,P.name).replace(/\{g\}/g,P.gender).replace(/\{a\}/g,P.age).replace(/\{o\}/g,P.job).replace(/\{i\}/g,P.hobby);}
+  function show(id){['intro','quiz','result'].forEach(function(s){$(s).classList.add('hidden');});$(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+
+  // ---- intro submit ----
+  $('introForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('f_name').value.trim(), gender=$('f_gender').value,
+        year=$('f_year').value.trim(), job=$('f_job').value.trim(), hobby=$('f_hobby').value.trim();
+    var yr=parseInt(year,10);
+    var nowY=new Date().getFullYear();
+    if(!name){return err("請先輸入你的姓名");}
+    if(!gender){return err("請選擇性別");}
+    if(!yr||yr<1920||yr>nowY){return err("請輸入正確的出生西元年");}
+    if(!job){return err("請輸入你的職業");}
+    if(!hobby){return err("請輸入你的興趣");}
+    P.name=esc(name);P.gender=esc(gender);P.job=esc(job);P.hobby=esc(hobby);
+    P.age=nowY-yr; // 實歲（約）
+    answers=new Array(20).fill(0);cur=0;
+    renderQ();show('quiz');
+  });
+  function err(m){$('introErr').textContent=m;}
+
+  // ---- render question ----
+  function renderQ(){
+    var q=Q[cur];
+    $('qNum').textContent=String(cur+1).padStart(2,'0');
+    $('qAxis').textContent=(q.a==='x')?'情緒軸 · 生命質感':'能量軸 · 自我結構';
+    $('qBar').style.width=((cur)/20*100+5)+'%';
+    $('qText').innerHTML='<div><span class="lead">'+fill(q.l)+'</span><br>'+q.b+'</div>';
+    var box=$('qOpts');box.innerHTML='';
+    SCALE.forEach(function(s){
+      var b=document.createElement('button');
+      b.className='opt';b.type='button';
+      b.innerHTML='<span class="dot"></span>'+s[0];
+      b.addEventListener('click',function(){answers[cur]=s[1];next();});
+      box.appendChild(b);
+    });
+    $('qBack').style.visibility=cur===0?'hidden':'visible';
+  }
+  function next(){
+    if(cur<19){cur++;renderQ();}
+    else{computeAndShow();}
+  }
+  $('qBack').addEventListener('click',function(){if(cur>0){cur--;renderQ();}});
+
+  // ---- compute ----
+  function computeAndShow(){
+    var xs=0,ys=0;
+    for(var i=0;i<20;i++){ if(Q[i].a==='x') xs+=answers[i]; else ys+=answers[i]; }
+    // each axis 10 q * 1..5 = 10..50  -> 1..10
+    var X=1+(xs-10)/40*9, Y=1+(ys-10)/40*9;
+    X=Math.max(1,Math.min(10,X)); Y=Math.max(1,Math.min(10,Y));
+    var qx=X>=5.5?'r':'l', qy=Y>=5.5?'t':'b', id=qx+qy;
+    renderResult(X,Y,id);
+    show('result');
+  }
+
+  // ---- render result ----
+  function renderResult(X,Y,id){
+    var d=QUAD[id];
+    $('rName').textContent=P.name+' 的心流座標';
+    $('rQuad').textContent=d.name;
+    $('rQuad').style.color=d.color;
+    $('rQuadSub').textContent=d.sub;
+    $('rX').innerHTML=X.toFixed(1)+'<small>/10</small>';
+    $('rY').innerHTML=Y.toFixed(1)+'<small>/10</small>';
+    $('rState').innerHTML=fill(d.state);
+    $('rBehav').innerHTML=fill(d.behav);
+    $('rClose').innerHTML=fill(d.close);
+    $('rBreak').innerHTML=fill(d.brk);
+    $('chart').innerHTML=buildChart(X,Y,id,d);
+  }
+
+  // ---- SVG radar chart ----
+  function buildChart(X,Y,id,d){
+    var L=70,R=530,T=70,B=530,C=300; // plot box & center
+    function px(x){return L+(x-1)/9*(R-L);}
+    function py(y){return B-(y-1)/9*(B-T);}
+    var dx=px(X), dy=py(Y);
+    var qcol={rt:'#E8B84B',lt:'#CD623F',lb:'#6E78C0',rb:'#3FA08C'};
+    function quadRect(x,y,w,h,c){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+c+'" opacity="'+(d.name===null?.12:.10)+'"/>';}
+    // rings
+    var rings='';[60,130,200,228].forEach(function(r){rings+='<circle cx="300" cy="300" r="'+r+'" fill="none" stroke="#C9A24B" stroke-opacity=".14"/>';});
+    // ticks
+    var ticks='';for(var v=1;v<=10;v++){var X1=px(v);ticks+='<line x1="'+X1+'" y1="298" x2="'+X1+'" y2="302" stroke="#C9A24B" stroke-opacity=".4"/>';var Y1=py(v);ticks+='<line x1="298" y1="'+Y1+'" x2="302" y2="'+Y1+'" stroke="#C9A24B" stroke-opacity=".4"/>';}
+
+    var s='<svg viewBox="0 0 600 600" role="img" aria-label="四大象限心流定位圖">';
+    s+='<defs>'
+      +'<radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#F0D98A"/><stop offset="100%" stop-color="#C9A24B" stop-opacity="0"/></radialGradient>'
+      +'<linearGradient id="sweepg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F0D98A" stop-opacity=".0"/><stop offset="100%" stop-color="#F0D98A" stop-opacity=".22"/></linearGradient>'
+      +'<filter id="ds"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#F0D98A" flood-opacity="0.9"/></filter>'
+      +'</defs>';
+    // backdrop
+    s+='<rect x="70" y="70" width="460" height="460" fill="#0C0B0E"/>';
+    // quadrant fills
+    s+=quadRect(300,70,230,230,qcol.rt); // right-top
+    s+=quadRect(70,70,230,230,qcol.lt);  // left-top
+    s+=quadRect(70,300,230,230,qcol.lb); // left-bottom
+    s+=quadRect(300,300,230,230,qcol.rb);// right-bottom
+    // sweep
+    s+='<g class="sweep"><path d="M300,300 L300,72 A228,228 0 0,1 461,139 Z" fill="url(#sweepg)"/></g>';
+    s+=rings;
+    // axes
+    s+='<line x1="70" y1="300" x2="530" y2="300" stroke="#C9A24B" stroke-opacity=".55"/>';
+    s+='<line x1="300" y1="70" x2="300" y2="530" stroke="#C9A24B" stroke-opacity=".55"/>';
+    s+=ticks;
+    s+='<rect x="70" y="70" width="460" height="460" fill="none" stroke="#8C6E2E"/>';
+    // quadrant labels
+    function ql(x,y,name,sub,col,anchor){return '<text x="'+x+'" y="'+y+'" text-anchor="'+anchor+'" font-family="Noto Serif TC,serif" font-weight="700" font-size="20" fill="'+col+'">'+name+'</text>'
+      +'<text x="'+x+'" y="'+(y+19)+'" text-anchor="'+anchor+'" font-family="Noto Sans TC,sans-serif" font-size="11" letter-spacing="2" fill="#8a836f">'+sub+'</text>';}
+    s+=ql(515,108,'光照之境','忘我超越','#E8B84B','end');
+    s+=ql(85,108,'烈焰之境','燃燒耗散','#CD623F','start');
+    s+=ql(85,500,'囚籠之境','本能困鎖','#6E78C0','start');
+    s+=ql(515,500,'靜水之境','自持涵養','#3FA08C','end');
+    // axis end labels
+    function t(x,y,txt,col,anc,size){return '<text x="'+x+'" y="'+y+'" text-anchor="'+(anc||'middle')+'" font-family="Noto Sans TC,sans-serif" font-size="'+(size||12)+'" fill="'+(col||'#b8ad90')+'" letter-spacing="1">'+txt+'</text>';}
+    s+=t(300,556,'情緒與生命質感','#C9A24B','middle',13);
+    s+=t(74,322,'Lv1 萬劫不復','#8a836f','start',11);
+    s+=t(526,322,'Lv10 圓滿涅槃','#8a836f','end',11);
+    s+=t(300,60,'Lv10 外張 · 忘我超越','#8a836f','middle',11);
+    s+=t(300,548,'Lv1 內聚 · 本能囚徒','#8a836f','middle',11);
+    s+='<text x="40" y="300" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="13" fill="#C9A24B" letter-spacing="1" transform="rotate(-90 40 300)">能量流向與自我結構</text>';
+    // energy-flow vector (center -> dot)
+    s+='<line x1="300" y1="300" x2="'+dx+'" y2="'+dy+'" stroke="#F0D98A" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="4 4"/>';
+    // halo + dot
+    s+='<circle class="halo" cx="'+dx+'" cy="'+dy+'" r="16" fill="url(#glow)"/>';
+    s+='<circle cx="'+dx+'" cy="'+dy+'" r="8.5" fill="#F0D98A" stroke="#fff" stroke-width="1.2" filter="url(#ds)"/>';
+    // callout for the dot
+    var cax=dx>300?dx-12:dx+12, can=dx>300?'end':'start';
+    var cay=dy>300?dy+26:dy-16;
+    s+='<text x="'+cax+'" y="'+cay+'" text-anchor="'+can+'" font-family="Noto Serif TC,serif" font-weight="700" font-size="15" fill="#F0D98A">你 · '+P.name+'</text>';
+    s+='<text x="'+cax+'" y="'+(cay+17)+'" text-anchor="'+can+'" font-family="Cinzel,serif" font-size="11" fill="#C9A24B">('+X.toFixed(1)+' , '+Y.toFixed(1)+')</text>';
+    // energy direction note near dot
+    var dirTxt=Y>=5.5?'能量外張 ↑':'能量內聚 ↓';
+    s+='<text x="'+cax+'" y="'+(cay+34)+'" text-anchor="'+can+'" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#b8ad90">'+dirTxt+'</text>';
+    s+='</svg>';
+    return s;
+  }
+
+  $('rRestart').addEventListener('click',function(){
+    $('introErr').textContent='';
+    show('intro');
+  });
+
+  // numeric-only birth year
+  $('f_year').addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');});
+})();
+</script>
